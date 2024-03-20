@@ -16,7 +16,7 @@ Trained model had the following hyperparameters:
 | $d_{v}$ | $d_{k}$ |
 | $p_{dropout}$ | 0.1 |
 
-Notation is the same as in [Vaswati et al. 2017](https://arxiv.org/pdf/1706.03762.pdf). In addition, dropout was also applied to attention weights. Positional embeddings are used instead of fixed wave embeddings as in the previous paper. Since tokenizers differ for source and target language, different token embedding tables in encoder and decoder are used, along with different positional embedding tables. This resulted in a model of $\approx85M$ parameters.
+Notation is the same as in [Vaswani et al. 2017](https://arxiv.org/pdf/1706.03762.pdf). In addition, dropout was also applied to attention weights. Positional embeddings are used instead of fixed wave embeddings as in the previous paper. Since tokenizers differ for source and target language, different token embedding tables in encoder and decoder are used, along with different positional embedding tables. This resulted in a model of $\approx85M$ parameters.
 
 ## Training
 Loss function of choice was label-smoothed cross-entropy with $\epsilon_l = 0.1$. Optimizer of choice was Adam, with an initial learning rate of $5e-4$ which was scaled by $0.95$ every 5-th epoch, for a total of 20 epochs. Chosen batch size was 128, with sequence padding. One consideration when creating batches was to group sentences of similar length together to minimize padding, however this would introduce bias in training procedure, and since we had sufficient hardware resources we discarded this approach. The training was conducted on NVIDIA GTX 3050 GPU, which lasted about 20-30 minutes. 
